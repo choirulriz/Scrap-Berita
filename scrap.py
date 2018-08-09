@@ -13,9 +13,23 @@ except HTTPError as he:
 
 indeks = soup.find_all("figure","swiper-slide")
 # link = 1
-# links=[]
+listBerita=[] #list link berita
 for link in indeks:
-	print (link.find('a').get('href'))
-	# links.append(link.find('a').get('href'))
+	# print (link.find('a').get('href'))
+	# if 
+	listBerita.append(link.find('a').get('href'))
 
-# print(links)
+# def bukaUrlWeb(urlWeb):
+# 	buka = urlopen(urlWeb).read()
+# 	sup = BeautifulSoup(buka,"lxml")
+# 	konten = sup.find_all("article")
+# 	for i in konten:
+# 		print (i.find("h1").get_text())
+
+	# print(sup.prettify()[1:100])
+
+for url in listBerita:
+	print (url)
+	# bukaUrlWeb(url)
+	# print(sup.prettify()[1:1000])
+	
