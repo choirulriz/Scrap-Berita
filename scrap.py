@@ -9,27 +9,30 @@ try:
 except HTTPError as he:
 	print(he)
 	exit()
-# print(soup.prettify()[1:1000])
 
-indeks = soup.find_all("figure","swiper-slide")
-# link = 1
-listBerita=[] #list link berita
-for link in indeks:
-	# print (link.find('a').get('href'))
-	# if 
-	listBerita.append(link.find('a').get('href'))
 
-# def bukaUrlWeb(urlWeb):
-# 	buka = urlopen(urlWeb).read()
-# 	sup = BeautifulSoup(buka,"lxml")
-# 	konten = sup.find_all("article")
-# 	for i in konten:
-# 		print (i.find("h1").get_text())
+indeksPilpres = soup.find_all('a', href = re.compile('https://pilpres\.tempo\.co/'))
 
-	# print(sup.prettify()[1:100])
+urlPilpres = []
 
-for url in listBerita:
-	print (url)
-	# bukaUrlWeb(url)
-	# print(sup.prettify()[1:1000])
-	
+for a in indeksPilpres:
+	urlPilpres.append(a['href'])
+	# print (a['href'])
+
+def remove(duplicate):
+    final_list = []
+    for num in duplicate:
+        if num not in final_list:
+            final_list.append(num)
+    return final_list
+
+urlPilpres = remove(urlPilpres)
+# print(urlPilpres)
+
+
+for b in urlPilpres:
+	buka = BeautifulSoup(urlopen(b).read(),'lxml')
+	konten = buka.find_all(id='isi')
+	print(buka.title.string)
+	print(b.find(p).get_text())
+
