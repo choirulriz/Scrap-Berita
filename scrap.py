@@ -32,7 +32,8 @@ urlPilpres = remove(urlPilpres)
 
 for b in urlPilpres:
 	buka = BeautifulSoup(urlopen(b).read(),'lxml')
-	konten = buka.find_all(id='isi')
-	print(buka.title.string)
-	print(b.find(p).get_text())
+	konten = buka.find_all(['title','p'])
+	for p in konten:
+		print(p.get_text())
+	
 
