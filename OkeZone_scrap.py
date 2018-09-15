@@ -3,7 +3,7 @@ from urllib.error import HTTPError
 from bs4 import BeautifulSoup
 import re
 import pandas as pd
-import requestss
+# import requestss
 
 # Bagian memanggil top level url nya, tempat mengekstrak banyak url lain yang berkaitan dengan berita pilpress
 try:
@@ -50,7 +50,7 @@ for b in urlPilpres:
 	konten = buka.find(id = 'contentx').find_all('p') #menemukan letak konten pada tag id=isi dan menampung semua tag <p>
 
 	nama_judul.append(judul)	#Ambil bagian Judul URL
-	konten_teks = '\t ' #Untuk Menampung semua tag <p>
+	konten_teks = ', ' #Untuk Menampung semua tag <p>
 	for p in konten:
 		# print(p.get_text())
 		konten_teks +=''.join(p.get_text().replace('\n',' '))
@@ -58,13 +58,14 @@ for b in urlPilpres:
 		# print(p)
 
 	isi.append(konten_teks)
-	# print(isi)
+	print(isi)
 	
 
-# Bagian memasang judul dan artikel kedalam data frame
+# # Bagian memasang judul dan artikel kedalam data frame
 data_tuples = list(zip(nama_judul,isi))
 df = pd.DataFrame(data_tuples,columns = ['Judul','Konten'])
-# print(df.head())
+
 # bagian menyimpan kedalam csv
-df.to_csv("okezone.csv",sep = '\t', encoding='utf-8') #separator menggunakan tab karena dalam paragraf banyak koma
+df.to_csv("Okezone2.csv",sep = ',', encoding='utf-8') #separator menggunakan tab karena dalam paragraf banyak koma
+
 

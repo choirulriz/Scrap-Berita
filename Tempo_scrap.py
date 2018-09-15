@@ -39,10 +39,10 @@ isi = []
 for b in urlPilpres:
 	buka = BeautifulSoup(urlopen(b).read(),'lxml')
 	judul = buka.find({'title': True}).get_text() #menemukan letak judul pada tag <\title>
-	konten = buka.find(id='isi','p').find_all('p') #menemukan letak konten pada tag id=isi dan menampung semua tag <p>
+	konten = buka.find(id='isi').find_all('p') #menemukan letak konten pada tag id=isi dan menampung semua tag <p>
 
 	nama_judul.append(judul)	#Ambil bagian Judul URL
-	konten_teks = '\t ' #Untuk Menampung semua tag <p>
+	konten_teks = ', ' #Untuk Menampung semua tag <p>
 	for p in konten:
 		konten_teks +=''.join(p.find_all(text = True))
 
@@ -53,5 +53,5 @@ data_tuples = list(zip(nama_judul,isi))
 df = pd.DataFrame(data_tuples,columns = ['Judul','Konten'])
 
 # bagian menyimpan kedalam csv
-df.to_csv("Tempoe.csv",sep = '\t', encoding='utf-8') #separator menggunakan tab karena dalam paragraf banyak koma
+df.to_csv("Tempoe4.csv",sep = ',', encoding='utf-8') #separator menggunakan tab karena dalam paragraf banyak koma
 

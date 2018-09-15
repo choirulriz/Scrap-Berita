@@ -5,6 +5,7 @@ import re
 import pandas as pd
 import requests
 
+
 # Bagian memanggil top level url nya, tempat mengekstrak banyak url lain yang berkaitan dengan berita pilpress
 try:
 	html = urlopen("https://nasional.kompas.com/").read()
@@ -49,19 +50,19 @@ for b in urlPilpres:
 	konten = buka.find(class_='read__content').find_all('p') #menemukan letak konten pada tag id=isi dan menampung semua tag <p>
 
 	nama_judul.append(judul)	#Ambil bagian Judul URL
-	konten_teks = '\t ' #Untuk Menampung semua tag <p>
+	konten_teks = ', ' #Untuk Menampung semua tag <p>
 	for p in konten:
 		konten_teks +=''.join(p.find_all(text = True))
 
 	isi.append(konten_teks)
 	# print(isi)
 	# break
-print("cek")
+# print("cek")
 
-# # # Bagian memasang judul dan artikel kedalam data frame
-# data_tuples = list(zip(nama_judul,isi))
-# df = pd.DataFrame(data_tuples,columns = ['Judul','Konten'])
+# # Bagian memasang judul dan artikel kedalam data frame
+data_tuples = list(zip(nama_judul,isi))
+df = pd.DataFrame(data_tuples,columns = ['Judul','Konten'])
 
-# # bagian menyimpan kedalam csv
-# df.to_csv("Kompas.csv",sep = '\t', encoding='utf-8') #separator menggunakan tab karena dalam paragraf banyak koma
+# bagian menyimpan kedalam csv
+df.to_csv("Kompas2.csv",sep = ',', encoding='utf-8') #separator menggunakan tab karena dalam paragraf banyak koma
 

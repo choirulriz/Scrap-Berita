@@ -44,6 +44,7 @@ isi = []
 # Bagian membuka tiap tiap url
 for b in urlPilpres:
 	# print('https://www.merdeka.com'+b)
+	
 	urls = urlopen('https://www.merdeka.com'+b).read()	
 	buka = BeautifulSoup(urls,'lxml')
 	
